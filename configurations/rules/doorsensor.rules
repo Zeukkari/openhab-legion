@@ -1,0 +1,35 @@
+import org.openhab.core.persistence.*
+import org.openhab.core.library.types.*
+import org.openhab.model.script.actions.*
+
+rule "Door 1 opened"
+when
+	Item Door1Open received update
+then
+	logInfo("Door 1 opened? ", "Was previously {}", Door1.state)
+	postUpdate(Door1,1)
+end
+
+rule "Door 1 closed"
+when
+	Item Door1Closed received update
+then
+	logInfo("Door 1 closed? ", "Was previously {}", Door1.state)
+	postUpdate(Door1,0)
+end
+
+rule "Door 2 opened"
+when
+	Item Door2Open received update
+then
+	logInfo("Door 2 opened? ", "Was previously {}", Door2.state)
+	postUpdate(Door2,1)
+end
+
+rule "Door 2 closed"
+when
+	Item Door2Closed received update
+then
+	logInfo("Door 2 closed? ", "Was previously {}", Door2.state)
+	postUpdate(Door2,0)
+end

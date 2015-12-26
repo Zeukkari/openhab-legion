@@ -1,0 +1,96 @@
+import org.openhab.core.persistence.*
+import org.openhab.core.library.types.*
+import org.openhab.model.script.actions.*
+
+rule "Switch 1 bridge"
+when
+	Item Switch1 received update
+then
+	logInfo("Switch 1 changed", "{} is set to {}", Switch1.state)
+	if(Dimmer1.state < 50 ) {
+		logInfo("Switch 1 @ < 50% press", "{} is set to {}", Switch1.state)
+		if(Switch1.state==ON) sendCommand(Dimmer1,50)
+		else sendCommand(Dimmer1,0)// Off..		
+	}
+	else if(Dimmer1.state > 50) {
+		logInfo("Switch 1 @ > 50% press", "{} is set to {}", Switch1.state)
+		if(Switch1.state==ON) sendCommand(Dimmer1,100)
+		else sendCommand(Dimmer1,50)
+	} else {
+		// state == 50
+		logInfo("Switch 1 @ 50% press", "{} is set to {}", Switch1.state)
+		if(Switch1.state==ON) sendCommand(Dimmer1,100)
+		else sendCommand(Dimmer1,0)
+	}
+end
+
+rule "Switch 2 bridge"
+when
+  Item Switch2 received update
+then
+  logInfo("Switch 1 changed", "{} is set to {}", Switch2.state)
+  if(Dimmer2.state < 50 ) {
+    logInfo("Switch 1 @ < 50% press", "{} is set to {}", Switch2.state)
+    if(Switch2.state==ON) sendCommand(Dimmer2,50)
+    else sendCommand(Dimmer2,0)// Off..   
+  }
+  else if(Dimmer2.state > 50) {
+    logInfo("Switch 1 @ > 50% press", "{} is set to {}", Switch2.state)
+    if(Switch2.state==ON) sendCommand(Dimmer2,100)
+    else sendCommand(Dimmer2,50)
+  } else {
+    // state == 50
+    logInfo("Switch 1 @ 50% press", "{} is set to {}", Switch2.state)
+    if(Switch2.state==ON) sendCommand(Dimmer2,100)
+    else sendCommand(Dimmer2,0)
+  }
+end
+
+rule "Remote 2 button 1 bridge"
+when
+  Item remote2button1 received update
+then
+  if(Dimmer1.state < 50 ) {
+    logInfo("Remote 2 button 1 @ < 50% press", "{} is set to {}", remote2button1.state)
+    if(remote2button1.state==ON) sendCommand(Dimmer1,50)
+    else sendCommand(Dimmer1,0)// Off..   
+  }
+  else if(Dimmer1.state > 50) {
+    logInfo("Remote 2 button 1 @ > 50% press", "{} is set to {}", remote2button1.state)
+    if(remote2button1.state==ON) sendCommand(Dimmer1,100)
+    else sendCommand(Dimmer1,50)
+  } else {
+    // state == 50
+    logInfo("Remote 2 button 1 @ 50% press", "{} is set to {}", remote2button1.state)
+    if(remote2button1.state==ON) sendCommand(Dimmer1,100)
+    else sendCommand(Dimmer1,0)
+  }
+end
+rule "Remote 2 button 2 bridge"
+when
+  Item remote2button2 received update
+then
+  if(Dimmer2.state < 50 ) {
+    logInfo("Remote 2 button 1 @ < 50% press", "{} is set to {}", remote2button2.state)
+    if(remote2button2.state==ON) sendCommand(Dimmer2,50)
+    else sendCommand(Dimmer2,0)// Off..   
+  }
+  else if(Dimmer2.state > 50) {
+    logInfo("Remote 2 button 1 @ > 50% press", "{} is set to {}", remote2button2.state)
+    if(remote2button2.state==ON) sendCommand(Dimmer2,100)
+    else sendCommand(Dimmer2,50)
+  } else {
+    // state == 50
+    logInfo("Remote 2 button 1 @ 50% press", "{} is set to {}", remote2button2.state)
+    if(remote2button2.state==ON) sendCommand(Dimmer2,100)
+    else sendCommand(Dimmer2,0)
+  }
+end
+rule "Remote 2 button 3 bridge"
+when
+  Item remote2button3 received update
+then
+  logInfo("Remote 2 button 3 press", "{} is set to {}", remote2button3.state)
+  if(remote2button3.state==ON) sendCommand(gLights,ON)
+  else sendCommand(gLights,OFF)
+end

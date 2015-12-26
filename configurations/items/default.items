@@ -1,0 +1,80 @@
+Group	All
+Group	gMyOpenHAB	"MyOpenHAB state change recording"	(All)
+Group	gMyOpenHABforce	"MyOpenHAB all updates recording"	(All)
+Group	gTransmitters	"Transmitters"	(All)	
+Group	gReceivers	(All)
+Group	gHue	(All)
+Group:Switch:OR(ON, OFF)	gLights	   "Lights %s"	(All)
+Group	gNexaRemotes	"Switches"	(gTransmitters)	
+Group	gDoorSensors	"Open doors"	(gSensors)	
+Group	gSensors	"Sensors"	(gTransmitters)	
+Group	gMotionSensors	"No. active motion sensors: [(%d)]"	(gSensors,gTransmitters)	
+Group	gDimmers	"No. active dimmers [(%d)]"	(gReceivers)	
+Group	gSockets	"No. active sockets [(%d)]"	(gReceivers)
+Group 	gHueColors
+Group 	gHueDimmers
+
+// ---------------
+// Remotes
+// ---------------
+
+// Dimmers
+Dimmer	Dimmer1	"Dimmer 1: [%d %%]"	<slider>	(gDimmers)		{ tellstick="Dimmer1:DimmingLevel:Dimmable" }
+Dimmer	Dimmer2	"Dimmer 2: [%d %%]"	<slider>	(gDimmers)		{ tellstick="Dimmer2:DimmingLevel:Dimmable:3" }
+
+// Basic outlets
+Switch	ToggleDimmer1	"Dimmer 1"	<socket>	(gSockets, gLights)		{ tellstick="Dimmer1:Command" }
+Switch	ToggleDimmer2	"Dimmer 2"		<socket>	(gSockets, gLights)		{ tellstick="Dimmer2:Command" }
+Switch	Socket3	"Socket 3"	<socket>	(gSockets, gLights)		{ tellstick="Socket3:Command" }
+Switch	Socket4	"Socket 4"	<socket>	(gSockets)		{ tellstick="Socket4:Command" }
+Switch	Socket5	"Socket 5"	<socket>	(gSockets, gLights)		{ tellstick="Socket5:Command" }
+Switch	Socket6	"Socket 6"	<socket>	(gSockets)		{ tellstick="Socket6:Command" }
+Switch	Socket7	"Socket 7"	<socket>	(gSockets)		{ tellstick="Socket7:Command" }
+Switch	Socket8	"Socket 8"	<socket>	(gSockets)		{ tellstick="Socket8:Command" }
+
+// ---------------
+// Remotes
+// ---------------
+
+// Remote 1
+Switch	remote1button1	"Remote 1 button 1"	(gNexaRemotes)		{ tellstick="remote1button1:Command" }
+Switch	remote1button2	"Remote 1 button 2"	(gNexaRemotes)		{ tellstick="remote1button2:Command" }
+Switch	remote1button3	"Remote 1 button 3"	(gNexaRemotes)		{ tellstick="remote1button3:Command" }
+
+// Remote 2
+Switch	remote2button1	"Remote 2 button 1"	(gNexaRemotes)		{ tellstick="remote2button1:Command" }
+Switch	remote2button2	"Remote 2 button 2"	(gNexaRemotes)		{ tellstick="remote2button2:Command" }
+Switch	remote2button3	"Remote 2 button 3"	(gNexaRemotes)		{ tellstick="remote2button3:Command" }
+
+// Wireless wall switch
+Switch	Switch1	"Switch 1"	(gNexaRemotes)		{ tellstick="Switch1:Command" }
+Switch	Switch2	"Switch 2"	(gNexaRemotes)		{ tellstick="Switch2:Command" }
+
+
+// ---------------
+// Sensors
+// ---------------
+Switch	ProximitySensor	"Proximity sensor 1		[MAP(proximity.map):%s]"	<proximity>	(gMyOpenHAB, gMyOpenHABforce, gMotionSensors)		{ tellstick="ProximitySensor:Command", autoupdate="true"}
+Number	Humidity	"Humidity [%.1f %%]"	<humidity>	(gSensors)		{ tellstick="11:Humidity", autoupdate="true"}
+Number	Temperature	"Temperature [%.1f C]"	<temperature>	(gSensors)		{ tellstick="11:Temperature", autoupdate="true"}
+
+// Door sensors
+Switch	Door1Open	"Contact 1 open"	(gReceivers)		{ tellstick="Contact1Open:Command" }
+Switch	Door1Closed	"Contact 1 closed"	(gReceivers)		{ tellstick="Contact1Closed:Command" }
+Switch	Door2Open	"Contact 2 open"	(gReceivers)		{ tellstick="Contact2Open:Command" }
+Switch	Door2Closed	"Contact 2 closed"	(gReceivers)		{ tellstick="Contact2Closed:Command" }
+Number	Door1	"Door 1 [MAP(contact.map):%s]"	<door>	(gDoorSensors, gSensors, gMyOpenHAB) {autoupdate="true", tellstick="26:Command" }
+Number	Door2	"Door 2 [MAP(contact.map):%s]"	<door>	(gDoorSensors, gSensors, gMyOpenHAB) {autoupdate="true", tellstick="27:Command" }
+
+Switch	TestButton	"Test button"	{autoupdate="false"}
+
+Switch Hue1   "Kitchen Hue"   (gLights, gHue) {hue="1"}
+Switch Hue2   "Entry Hue" (gLights, gHue) {hue="2"}
+Switch Hue3       "Background Hue"  (gLights, gHue) {hue="3"}
+Color Color_1     "Kitchen Hue"   (gHueColors)  {hue="1"}
+Color Color_2         "Entry Hue" (gHueColors)  {hue="2"}
+Color Color_3     "Background Hue"  (gHueColors)  {hue="3"}
+Dimmer CT_Dimm_1      "Kitchen Hue"   (gHueDimmers)  {hue="1;colorTemperature;30"}
+Dimmer CT_Dimm_2      "Entry Hue" (gLights, gDimmers, gHue)  {hue="2;colorTemperature;30"}
+Dimmer CT_Dimm_3      "Background Hue"  ((gLights, gDimmers, gHue))  {hue="3;colorTemperature;30"}
+

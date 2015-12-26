@@ -1,0 +1,10 @@
+import org.openhab.core.persistence.*
+import org.openhab.core.library.types.*
+import org.openhab.model.script.actions.*
+
+rule "Test button pressed"
+when
+  Item TestButton received command
+then
+  logInfo("Test button trigger! ", "Test button pressed: {}", TestButton.state)
+end
