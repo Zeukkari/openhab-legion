@@ -1,0 +1,19 @@
+rule "Switch 1 bridge"
+when
+	Item Switch1 received command
+then
+	var Number percent = 0
+	if(Dimmer1.state instanceof DecimalType) {
+		percent = Dimmer1.state as DecimalType
+	}
+	if(Switch1.state==ON) {
+		percent = percent + 25
+		if(percent>100) percent = 100
+		sendCommand(Dimmer1,percent)
+	} else {
+		percent = percent - 25
+		if(percent<0) percent = 0
+		sendCommand(Dimmer1,percent)
+	}
+	
+end

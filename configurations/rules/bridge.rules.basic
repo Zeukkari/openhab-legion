@@ -1,0 +1,22 @@
+import org.openhab.core.persistence.*
+import org.openhab.core.library.types.*
+import org.openhab.model.script.actions.*
+
+rule "Switch 1 bridge"
+when
+	Item Switch1 changed
+then
+	logInfo("Switch 1 changed", "{} is set to {}", Switch1.state)
+	if(Switch1.state==ON) sendCommand(Dimmer1,ON)
+	else sendCommand(Dimmer1,OFF)
+end
+
+
+rule "Switch 2 bridge"
+when
+	Item Switch2 changed
+then
+	logInfo("Switch 2 changed", "{} is set to {}", Switch2.state)
+	if(Switch2.state==ON) sendCommand(Dimmer2,ON)
+	else sendCommand(Dimmer2,OFF)
+end
