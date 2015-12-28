@@ -13,6 +13,6 @@ Strategies {
  * item (excl. the group item itself).
  */
 Items {
-  gReceivers* : strategy = everyChange, everyMinute, restoreOnStartup
+  // gReceivers* : strategy = everyChange, everyMinute, restoreOnStartup
   //gSensors* : strategy = everyChange, everyMinute,restoreOnStartup
 }

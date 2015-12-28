@@ -4,7 +4,7 @@ Group	gMyOpenHABforce	"MyOpenHAB all updates recording"	(All)
 Group	gTransmitters	"Transmitters"	(All)	
 Group	gReceivers	(All)
 Group	gHue	(All)
-Group:Switch:OR(ON, OFF)	gLights	   "Lights %s"	(All)
+Group:Switch:OR(ON, OFF)	gLights	   "All Lights!"	(All)
 Group	gNexaRemotes	"Switches"	(gTransmitters)	
 Group	gDoorSensors	"Open doors"	(gSensors)	
 Group	gSensors	"Sensors"	(gTransmitters)	
@@ -76,5 +76,5 @@ Color Color_2         "Entry Hue" (gHueColors)  {hue="2"}
 Color Color_3     "Background Hue"  (gHueColors)  {hue="3"}
 Dimmer CT_Dimm_1      "Kitchen Hue"   (gHueDimmers)  {hue="1;colorTemperature;30"}
 Dimmer CT_Dimm_2      "Entry Hue" (gLights, gDimmers, gHue)  {hue="2;colorTemperature;30"}
-Dimmer CT_Dimm_3      "Background Hue"  ((gLights, gDimmers, gHue))  {hue="3;colorTemperature;30"}
+Dimmer CT_Dimm_3      "Background Hue"  (gLights, gDimmers, gHue)  {hue="3;colorTemperature;30"}
 

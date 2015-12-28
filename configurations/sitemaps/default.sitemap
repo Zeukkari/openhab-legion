@@ -10,10 +10,15 @@ sitemap default label="Legion"
   }
 	
   Frame label="Quick" {
-  	Switch item="gLights" label="All Lights"
+  	Switch item=gLights label="All Lights"
+    Switch item=Hue2  label="Entry"
     Switch item=Dimmer1 label="Ceiling Light"
+    Switch  item=Hue1  label="Kitchen"
+    Switch item=Socket5 label="Nightstand"
     Switch item=Dimmer2 label="Desktop Light"
-    Switch item=Socket5 label="Night stand Light"
+    Switch  item=CastDown
+    Switch  item=CastUp
+    Switch  item=CastMute
   }
 
   Frame label="Advanced" icon="info" {
@@ -35,18 +40,14 @@ sitemap default label="Legion"
       Text label="Dimmers"  icon="settings" {
         Slider item=Dimmer1 label="Dimmer 1" sendFrequency=1000
         Slider item=Dimmer2 label="Dimmer 2" sendFrequency=1000
-        Slider  item=Dimm_1     visibility=[Toggle_1==ON]    label="Kitchen Brightness" 
-        Slider  item=Dimm_2     visibility=[Toggle_2==ON]    label="Entry Brightness" 
-        Slider  item=Dimm_3     visibility=[Toggle_3==ON]  label="Background Brightness" 
+        Slider  item=CT_Dimm_1     visibility=[Toggle_1==ON]    label="Kitchen Brightness" 
+        Slider  item=CT_Dimm_2     visibility=[Toggle_2==ON]    label="Entry Brightness" 
+        Slider  item=CT_Dimm_3     visibility=[Toggle_3==ON]  label="Background Brightness" 
       }
       Text label="Color options" icon="info" {
-        
         Colorpicker    item=Color_1    visibility=[Toggle_1==ON]    label="Kitchen Light Color"
-        Slider  item=CT_Dimm_1  visibility=[Toggle_1==ON]    label="Kitchen Color Temperature"  
         Colorpicker    item=Color_2    visibility=[Toggle_2==ON]    label="Entry Light Color"
-        Slider  item=CT_Dimm_2  visibility=[Toggle_2==ON]    label="Entry Color Temperature"  
         Colorpicker    item=Color_3    visibility=[Toggle_3==ON]    label="Background Light Color"
-        Slider  item=CT_Dimm_3  visibility=[Toggle_3==ON]  label="Background Color Temperature"  
       }
     }
     Text label="Controls" icon="settings" {
