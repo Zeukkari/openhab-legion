@@ -10,7 +10,7 @@ Switch	Fan	"Fan"	(tAll)		{ tellstick="Fan:Command" }
 Dimmer	CeilingLight	"Ceiling light"	(tLights,ComLights)		{ tellstick="CeilingLight:DimmingLevel" }
 Dimmer	DeskLight	"Desktop light"	(tLights,ComLights)		{ tellstick="DeskLight:DimmingLevel" }
 Switch	LEDLight	"LED light"	(tLights,ComLights)		{ tellstick="LEDLight:Command" }
-Switch	StickLight	"Stick light"	(tLights,ComLights)		{ tellstick="StickLight:Command" }
+Switch	StickLight	"Stick light [%B]"	(tLights,ComLights)		{ tellstick="StickLight:Command" }
 Number	Temperature	"Temperature [%.1f C]"	<temperature>	(tSensors)		{ tellstick="11:Temperature" }
 Number	Humidity	"Humidity [%.1f %%]"	<temperature>	(tSensors)		{ tellstick="11:Humidity" }
 Number	AvgTemperature	"Average temperature [%.1f C]"	(SensorData)	

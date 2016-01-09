@@ -1,0 +1,39 @@
+sitemap default label="Legion"
+
+{
+ Frame label="Controls" {
+	Switch item=ComLights label="All lights" mappings=[ON="Turn on", OFF="Turn off"]
+	Switch item=Fan label="Fan" mappings=[ON="On", OFF="Off"]
+	Switch item=StickLight mappings=[ON="On", OFF="Off"]
+	Switch item=DeskLight mappings=[ON="On", OFF="Off"]
+	Switch item=LEDLight mappings=[ON="On", OFF"Off"]
+	Switch item=CeilingLight mappings=[ON="On", OFF="Off"]
+	Setpoint item=DeskLight minValue=0 maxValue=255 step=10
+	}
+Frame label="Testing" {
+	//Switch item=DimCeiling label="Dim Ceiling Switch" mappings=[INCREASE="<-", DECREASE="->"]
+	Switch item=CeilingLight label="Ceiling Switch" mappings=[INCREASE="<-", DECREASE="->"]
+	}
+Frame label="Temperature and humidity" {
+	Frame {
+		Text item=Temperature
+        	Text item=Humidity
+		Text item=AvgTemperature
+		}
+	Frame {
+		Switch item=Sensor_Chart label="Temperature and humidity" icon="chart" mappings=[OFF="Hour", ON="4h"]
+		Switch item=Sensor_Chart2 mappinga=[OFF="Humidity", OM="Temperature"]
+		Chart item=Temperature service="rrd4j period=h refresh=10000 visibility=[Sensor_Chart==OFF, Sensor_Chart=="Uninitialized"]
+		Chart item=Temperature service="rrd4j" period=4h refresh=10000 visibility=[Sensor_Chart==ON]
+		// Chart item=Temperature service="rrd4j" period=8h refresh=10000 visibility=[Sensor_Chart==2]
+		// Chart item=Temperature service="rrd4j" period=D refresh=20000 visibility=[Sensor_Chart==3]
+		Chart item=Humidity service="rrd4j" w=200 h=120 period=h refresh=10000 visibility=[Sensor_Chart==ON]
+
+		}
+	}
+Frame label="Test chart" {
+        Chart item=tSensors service="rrd4j" period=h refresh=10000
+        }
+}
+
+	

@@ -1,0 +1,29 @@
+/* Device groups */
+Group   All
+Group   tAll            (All)
+Group   tLights         (tAll)
+Group   tSensors        (tAll)
+
+/* Command groups */
+Group   Command         (All)
+Group   SensorData      (All)
+Group:Switch:OR(ON, OFF)        ComLights       "All Lights [(%d)$
+
+/* Command */
+Dimmer DimCeiling (Command)
+Group:Switch:OR(ON, OFF) Sensor_Chart (tSensors, Command)
+
+/* Other */
+Switch Fan "Fan" {tellstick="Fan:Command"}
+
+/* Lights */
+Dimmer CeilingLight "Ceiling light" (tLights, ComLights) {tellsti$
+Dimmer DeskLight "Desktop light" (tLights, ComLights) {tellstick=$
+Switch LEDLight "LED light" (tLights, ComLights) {tellstick="LEDL$
+Switch StickLight "Stick light" (tLights, ComLights) {tellstick="$
+
+/* Sensors */
+
+Number Temperature "Temperature: [%.1f C]" (tSensors) {tellstick=$
+Number Humidity "Humidity: [%.1f %%]" (tSensors) {tellstick="11:H$
+Number AvgTemperature "Average temperature: [%.1f C]" (SensorData)

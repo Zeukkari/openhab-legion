@@ -1,62 +1,36 @@
 sitemap default label="Legion"
+
 {
-  Frame label="Home Control" {
-  	Text label="Status"	icon="info" {
-      Text label="TODO" icon="info"
-      Text label="TODO" icon="info"
-      Text label="TODO" icon="info"
-    } 
-  	Switch item=TestButton icon="info"
-  }
-	
-  Frame label="Quick" {
-  	Switch item=gLights label="All Lights"
-    Switch item=Hue2  label="Entry"
-    Switch item=Dimmer1 label="Ceiling Light"
-    Switch  item=Hue1  label="Kitchen"
-    Switch item=Socket5 label="Nightstand"
-    Switch item=Dimmer2 label="Desktop Light"
-    Switch  item=CastDown
-    Switch  item=CastUp
-    Switch  item=CastMute
-  }
-
-  Frame label="Advanced" icon="info" {
-    Text label="Sensors"  icon="settings" {
-      Text item=Door1
-      Text item=Door2
-      Text item=ProximitySensor
-      Text item=Temperature
-      Text item=Humidity
-    }
-    Text label="Lights" icon="settings" { 
-      Switch  item=Hue2  label="Entry"
-      Switch item=ToggleDimmer1 label="Ceiling Light"
-      Switch item=ToggleDimmer2 label="Desk Light"
-      Switch  item=Hue3  label="Background"
-      Switch item=Socket3 label="Background LED"
-      Switch item=Socket5 label="Nightstand"
-      Switch  item=Hue1  label="Kitchen"
-      Text label="Dimmers"  icon="settings" {
-        Slider item=Dimmer1 label="Dimmer 1" sendFrequency=1000
-        Slider item=Dimmer2 label="Dimmer 2" sendFrequency=1000
-        Slider  item=CT_Dimm_1     visibility=[Toggle_1==ON]    label="Kitchen Brightness" 
-        Slider  item=CT_Dimm_2     visibility=[Toggle_2==ON]    label="Entry Brightness" 
-        Slider  item=CT_Dimm_3     visibility=[Toggle_3==ON]  label="Background Brightness" 
-      }
-      Text label="Color options" icon="info" {
-        Colorpicker    item=Color_1    visibility=[Toggle_1==ON]    label="Kitchen Light Color"
-        Colorpicker    item=Color_2    visibility=[Toggle_2==ON]    label="Entry Light Color"
-        Colorpicker    item=Color_3    visibility=[Toggle_3==ON]    label="Background Light Color"
-      }
-    }
-    Text label="Controls" icon="settings" {
-
-      Text label="Appliances" icon="info"
-      Switch item=Socket6 label="Socket 6"
-      Switch item=Socket7 label="Socket 7"
-      Switch item=Socket4 label="Fan"
-      Switch item=Socket8 label="Coffeemaker"
-    }
-  }
+ Frame label="Controls" {
+	Switch item=ComLights label="All lights" mappings=[ON="Turn on", OFF="Turn off"]
+	Switch item=StickLight mappings=[ON="On", OFF="Off"]
+	Switch item=LEDLight mappings=[ON="On", OFF"Off"]
+	Switch item=DeskLight mappings=[ON="On", 0="Off"]
+	Switch item=CeilingLight mappings=[ON="On", 0="Off"]
+	Switch item=Fan label="Fan" mappings=[ON="On", OFF="Off"]
+	}
+Frame label="Dimmers" {
+	//Switch item=DimCeiling label="Dim Ceiling Switch" mappings=[INCREASE="<-", DECREASE="->"]
+	//Switch item=CeilingLight label="Ceiling Switch" mappings=[INCREASE="<-", DECREASE="->"]
+	Slider item=DeskLight label="Desktop Light" sendFrequency=100
+	Slider item=CeilingLight label="Ceiling Light" sendFrequency=100
+	}
+Frame label="Temperature and humidity" {
+	Frame {
+		Text item=Temperature
+        	Text item=Humidity
+		Text item=AvgTemperature
+		}
+	Frame {
+		Switch item=Sensor_Chart label="Temperature and humidity" icon="chart" mappings=[OFF="Hour", ON="Day"]
+		Chart item=Temperature service="rrd4j" period=h refresh=10000 visibility=[Sensor_Chart==OFF, Sensor_Chart=="Uninitialized"]
+		Chart item=Temperature service="rrd4j" period=D refresh=10000 visibility=[Sensor_Chart==ON]
+		// Chart item=Temperature service="rrd4j" period=8h refresh=10000 visibility=[Sensor_Chart==2]
+		// Chart item=Temperature service="rrd4j" period=D refresh=20000 visibility=[Sensor_Chart==3]
+		Chart item=Humidity service="rrd4j" period=h refresh=10000 visibility=[Sensor_Chart==OFF, Sensor_Chart="Uninitialized"]
+		Chart item=Humidity service="rrd4j" period=D refresh=10000 visibility=[Sensor_Chart==ON]
+		}
+	}
 }
+
+	

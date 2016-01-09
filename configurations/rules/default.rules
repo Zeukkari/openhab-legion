@@ -2,9 +2,30 @@ import org.openhab.core.persistence.*
 import org.openhab.core.library.types.*
 import org.openhab.model.script.actions.*
 
-rule "Test button pressed"
+rule "Temperature average"
 when
-  Item TestButton received command
+	Item Temperature changed
 then
-  logInfo("Test button trigger! ", "Test button pressed: {}", TestButton.state)
+	var average = Temperature.averageSince(now.minusMinutes(30))
+	postUpdate(AvgTemperature, average)
+end
+
+
+rule "Dim ceiling light"
+
+when
+        Item DimCeiling received command
+then
+	var dimLevel = 0
+        //dimLevel = callScript("restapi")
+	dimLevel = DimLevel.state
+
+        if(receivedCommand=INCREASE) dimLevel = dimLevel + 10
+        if(receivedCommand=DECREASE) dimLevel = dimLevel - 10
+
+        if(dimLevel > 0) dimLevel = 0
+        if(dimLevel < 255) dimLevel = 255
+
+	sendCommand(CeilingLight, dimLevel as percentType)
+	postUpdate(DimCeiling, dimLevel)
 end

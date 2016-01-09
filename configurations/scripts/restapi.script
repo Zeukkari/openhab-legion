@@ -1,0 +1,16 @@
+request = $.ajax
+    ({
+        type       : "GET",
+        url        : "http://legion:8080/rest/items/Ceilingight/state"
+    });
+
+    request.done( function(data) 
+    { 
+        console.log( "Success: Status=" + data );
+    });
+
+    request.fail( function(jqXHR, textStatus ) 
+    { 
+        console.log( "Failure: " + textStatus );
+    });
+

@@ -1,0 +1,28 @@
+sitemap tellstick label="Legion"
+{
+	Frame label="Controls" {
+		Switch item=ComLights label="All lights" mappings=[ON="Turn on", OFF="Turn off"]		
+		Switch item=LEDLight mappings=[ON="On", OFF="Off"]		
+		Switch item=DeskLight mappings=[ON="On", OFF="Off"]		
+		Switch item=CeilingLight mappings=[ON="On", 0="Off"]		
+		Switch item=Fan label="Fan" mappings=[ON="On", OFF="Off"]		
+	}	
+	Frame label="Dimmers" {
+		Slider item=DeskLight label="Desktop Light" sendFrequency=100		
+		Slider item=CeilingLight label="Ceiling Light" sendFrequency=100		
+	}	
+	Frame label="Temperature and humidity" {
+		Frame {
+			Text item=Temperature			
+			Text item=Humidity			
+			Text item=AvgTemperature icon="temperature"			
+		}		
+		Frame {
+			Switch item=Sensor_Chart label="Range" icon="chart" mappings=[OFF="Hour", ON="Day"]			
+			Chart item=Temperature period=h service="rrd4j" refresh=10000			
+			Chart item=Temperature period=D service="rrd4j" refresh=10000			
+			Chart item=Humidity period=h service="rrd4j" refresh=10000			
+			Chart item=Humidity period=D service="rrd4j" refresh=10000			
+		}		
+	}	
+}

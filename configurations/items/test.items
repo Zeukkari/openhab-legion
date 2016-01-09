@@ -1,0 +1,2 @@
+Switch  Switch1     "Switch 1"          { tellstick="16:Command" }
+
