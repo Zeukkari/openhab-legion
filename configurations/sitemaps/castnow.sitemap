@@ -1,0 +1,22 @@
+sitemap chromecast label="Chromecast"
+{
+    Frame label="State" {
+        Text    item=CastState
+        Text    item=CastSource
+    }
+    Frame label="Control" {
+        Switch  item=CastDown
+        Switch  item=CastUp
+        Switch  item=CastMute
+
+        Switch  item=CastPause
+        Switch  item=CastStop
+        Switch  item=CastLeft
+        Switch  item=CastRight
+
+        Switch  item=CastQuit
+    }
+    Frame label="Voice Testing" {
+        Switch  item=SayNow
+    }
+}
